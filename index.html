@@ -521,18 +521,25 @@ header {
 
 <script>
 // ─── FIREBASE ─────────────────────────────────────────────────────────────────
-const fbConfig={
-  apiKey:"AIzaSyAP5qlQIxKkJarR7ujKklGXOpXMSMFm9qE",
-  authDomain:"dashboard-clareou.firebaseapp.com",
-  databaseURL:"https://dashboard-clareou-default-rtdb.firebaseio.com",
-  projectId:"dashboard-clareou",
-  storageBucket:"dashboard-clareou.firebasestorage.app",
-  messagingSenderId:"596902817632",
-  appId:"1:596902817632:web:1a98297d76cb9c4de9f805"
-};
-firebase.initializeApp(fbConfig);
-const DB = firebase.database();
-const REF = DB.ref('analytics');
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAEyU0NXt4mAzZBJzNQHS1ncYfV_d3doT4",
+    authDomain: "sergipebahia-analise.firebaseapp.com",
+    databaseURL: "https://sergipebahia-analise-default-rtdb.firebaseio.com",
+    projectId: "sergipebahia-analise",
+    storageBucket: "sergipebahia-analise.firebasestorage.app",
+    messagingSenderId: "663372397890",
+    appId: "1:663372397890:web:37dee6dfd26adc461f9cdb",
+    measurementId: "G-75LFRNZ4KV"
+  };
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
 const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
@@ -1239,29 +1246,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAEyU0NXt4mAzZBJzNQHS1ncYfV_d3doT4",
-    authDomain: "sergipebahia-analise.firebaseapp.com",
-    databaseURL: "https://sergipebahia-analise-default-rtdb.firebaseio.com",
-    projectId: "sergipebahia-analise",
-    storageBucket: "sergipebahia-analise.firebasestorage.app",
-    messagingSenderId: "663372397890",
-    appId: "1:663372397890:web:37dee6dfd26adc461f9cdb",
-    measurementId: "G-75LFRNZ4KV"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
 </script>
 </body>
 </html>
