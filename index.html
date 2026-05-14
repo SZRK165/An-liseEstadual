@@ -572,6 +572,7 @@ let STATE = {
 
 const charts = {};
 const fR = v => 'R$\u00a0'+Number(v).toLocaleString('pt-BR',{maximumFractionDigits:0});
+const fR2 = v => 'R$\u00a0'+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fK = v => v>=1e6?'R$'+(v/1e6).toFixed(1)+'M':v>=1e3?'R$'+(v/1e3).toFixed(0)+'K':fR(v);
 const GC = () => document.body.classList.contains('light')?'rgba(0,0,0,0.05)':'rgba(255,255,255,0.04)';
 const TC = () => document.body.classList.contains('light')?'#5a6280':'#7a8599';
@@ -645,7 +646,7 @@ const lineLabelsPlugin = {
     const placed = []; // {x, y, w, h} bounding boxes already drawn
 
     positions.forEach(pos => {
-      const lbl = fmt === 'r' ? fK(pos.val) : String(pos.val);
+      const lbl = fmt === 'r2' ? fR2(pos.val) : (fmt === 'r' ? fK(pos.val) : String(pos.val));
       ctx.font = 'bold 13px DM Sans, sans-serif';
       const tw = ctx.measureText(lbl).width;
       const th = 14;
@@ -1061,7 +1062,7 @@ function renderMensal() {
         borderColor:'#1e2535',borderWidth:1,
         titleColor:document.body.classList.contains('light')?'#111':'#eef0f5',
         bodyColor:'#7a8599',padding:10,
-        callbacks:{label:c=>fmt==='r'?' '+fR(c.raw):' '+c.raw}
+        callbacks:{label:c=>fmt==='r'?' '+fR2(c.raw):' '+c.raw}
       }
     },
     scales:{
@@ -1071,9 +1072,9 @@ function renderMensal() {
     animation:{duration:500,easing:'easeInOutQuart'}
   });
 
-  if(ctxFat){charts['ch-mensal-fat']=new Chart(ctxFat,{type:'bar',data:{labels,datasets:fatDs},options:barOpts('r')});}
-  if(ctxPed){charts['ch-mensal-ped']=new Chart(ctxPed,{type:'bar',data:{labels,datasets:pedDs},options:barOpts('n')});}
-  if(ctxCli){charts['ch-mensal-cli']=new Chart(ctxCli,{type:'bar',data:{labels,datasets:cliDs},options:barOpts('n')});}
+if(ctxFat){charts['ch-mensal-fat']=new Chart(ctxFat,{...,options:barOpts('r')}); charts['ch-mensal-fat']._fmt='r2';}
+if(ctxPed){charts['ch-mensal-ped']=new Chart(ctxPed,{...,options:barOpts('n')}); charts['ch-mensal-ped']._fmt='n';}
+if(ctxCli){charts['ch-mensal-cli']=new Chart(ctxCli,{...,options:barOpts('n')}); charts['ch-mensal-cli']._fmt='n';}
 
   // Legend
   buildLegend('leg-mensal-fat', cons.map(c=>c.name), colors);
